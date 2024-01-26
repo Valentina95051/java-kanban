@@ -1,14 +1,14 @@
-package Model;
+package model;
 
-import java.security.Provider;
+import java.util.Objects;
 
 public class Task {
     private int id;
     private String name;
     private String description;
-    private Service.Status status;
+    private Status status;
 
-    public Task(String name, Service.Status status, String description) {
+    public Task(String name, Status status, String description) {
     this.name = name;
     this.status = status;
     this.description = description;
@@ -30,11 +30,11 @@ public class Task {
         this.name = name;
     }
 
-    public Service.Status getStatus() {
+    public Status getStatus() {
         return status;
     }
 
-    public void setStatus(Service.Status status) {
+    public void setStatus(Status status) {
         this.status = status;
     }
 
@@ -51,8 +51,20 @@ public class Task {
         return "Task{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", status='" + status + '\'' +
                 ", description='" + description + '\'' +
+                ", status=" + status +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Task task)) return false;
+        return id == task.id && Objects.equals(name, task.name) && Objects.equals(description, task.description) && status == task.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, description, status);
     }
 }

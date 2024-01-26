@@ -1,8 +1,8 @@
-import Model.Epic;
-import Model.SubTask;
-import Model.Task;
-import Service.Status;
-import Service.TaskManager;
+import model.Epic;
+import model.SubTask;
+import model.Task;
+import model.Status;
+import service.TaskManager;
 
 import java.util.ArrayList;
 import java.util.List;

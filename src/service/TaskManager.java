@@ -1,31 +1,23 @@
-package Service;
+package service;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import Model.Epic;
-import Model.SubTask;
-import Model.Task;
+import model.Epic;
+import model.Status;
+import model.SubTask;
+import model.Task;
 
 public class TaskManager {
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, Epic> epics;
-    private HashMap<Integer, SubTask> subTasks;
-
-    public TaskManager(HashMap<Integer, Task> tasks, HashMap<Integer, Epic> epics, HashMap<Integer, SubTask> subTasks) {
-        this.tasks = tasks;
-        this.epics = epics;
-        this.subTasks = subTasks;
-    }
+    private HashMap<Integer, Task> tasks = new HashMap<>();
+    private HashMap<Integer, Epic> epics = new HashMap<>();
+    private HashMap<Integer, SubTask> subTasks = new HashMap<>();
 
     public TaskManager() {
-        this.tasks = new HashMap<>();
-        this.epics = new HashMap<>();
-        this.subTasks = new HashMap<>();
     }
 
-    int count = 0;
+     int count = 0;
 
     private int generateId() {
         return count++;
@@ -93,6 +85,7 @@ public class TaskManager {
 
     public void deleteAllEpics() {
         epics.clear();
+        deleteAllSubTasks();
     }
 
 
@@ -132,7 +125,9 @@ public class TaskManager {
     }
 
     public void deleteAllSubTasks() {
-        subTasks.clear();
+        for (int id: subTasks.keySet()){
+            deleteSubTask(id);
+        }
     }
 
     public void deleteSubTask(int id) {
