@@ -2,7 +2,8 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 import model.Status;
-import service.TaskManager;
+import service.InMemoryHistoryManager;
+import service.InMemoryTaskTaskManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,15 @@ public class Main {
         subTask1.setEpic(epic1);
         subTask2.setEpic(epic1);
         subTask3.setEpic(epic2);
-        TaskManager taskManager = new TaskManager();
-        Task testTask1 = taskManager.createTask(task1);
-        Task testTask2 = taskManager.createTask(task2);
-        Epic testEpic1 = taskManager.createEpic(epic1);
-        Epic testEpic2 = taskManager.createEpic(epic2);
-        SubTask testST1 = taskManager.createSubTask(subTask1);
-        SubTask testST2 = taskManager.createSubTask(subTask2);
-        SubTask testST3 = taskManager.createSubTask(subTask3);
+        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
+        InMemoryTaskTaskManager inMemoryTaskManager = new InMemoryTaskTaskManager(historyManager);
+        Task testTask1 = inMemoryTaskManager.createTask(task1);
+        Task testTask2 = inMemoryTaskManager.createTask(task2);
+        Epic testEpic1 = inMemoryTaskManager.createEpic(epic1);
+        Epic testEpic2 = inMemoryTaskManager.createEpic(epic2);
+        SubTask testST1 = inMemoryTaskManager.createSubTask(subTask1);
+        SubTask testST2 = inMemoryTaskManager.createSubTask(subTask2);
+        SubTask testST3 = inMemoryTaskManager.createSubTask(subTask3);
         System.out.println(testTask1);
         System.out.println(testTask2);
         System.out.println(testEpic1);
@@ -48,13 +50,13 @@ public class Main {
         testST1.setStatus(Status.IN_PROGRESS);
         testST2.setStatus(Status.DONE);
         testST3.setStatus(Status.DONE);
-        taskManager.updateTask(testTask1);
-        taskManager.updateTask(testTask2);
-        taskManager.updateSubTask(testST1);
-        taskManager.updateSubTask(testST2);
-        taskManager.updateSubTask(testST3);
-        taskManager.updateEpic(testEpic1);
-        taskManager.updateEpic(testEpic2);
+        inMemoryTaskManager.updateTask(testTask1);
+        inMemoryTaskManager.updateTask(testTask2);
+        inMemoryTaskManager.updateSubTask(testST1);
+        inMemoryTaskManager.updateSubTask(testST2);
+        inMemoryTaskManager.updateSubTask(testST3);
+        inMemoryTaskManager.updateEpic(testEpic1);
+        inMemoryTaskManager.updateEpic(testEpic2);
         System.out.println(testTask1);
         System.out.println(testTask2);
         System.out.println(testEpic1);
@@ -62,11 +64,32 @@ public class Main {
         System.out.println(testST2);
         System.out.println(testEpic2);
         System.out.println(testST3);
-        System.out.println("Удалили одну из задач и один эпик:");
-        taskManager.deleteTask(testTask1.getId());
-        taskManager.deleteEpic(testEpic2.getId());
-        System.out.println(taskManager.getAllTasks());
-        System.out.println(taskManager.getAllEpics());
-        System.out.println(taskManager.getAllSubTasksForEpic(testEpic1.getId()));
+
+
+        System.out.println("Задачи:");
+            for (Task task : inMemoryTaskManager.getAllTasks()) {
+                System.out.println(task);
+            }
+        System.out.println("Эпики:");
+            for (Task epic : inMemoryTaskManager.getAllEpics()) {
+                System.out.println(epic);
+
+                for (Task task : inMemoryTaskManager.getAllSubTasksForEpic(epic.getId())) {
+                    System.out.println("--> " + task);
+                }
+            }
+        System.out.println("Подзадачи:");
+            for (Task subtask : inMemoryTaskManager.getAllSubTasks()) {
+                System.out.println(subtask);
+            }
+
+        System.out.println("История:");
+            inMemoryTaskManager.getTask(0);
+            inMemoryTaskManager.getEpic(2);
+            inMemoryTaskManager.getSubTask(4);
+            for (Task task : historyManager.getAll()) {
+                System.out.println(task);
+            }
+
     }
 }
