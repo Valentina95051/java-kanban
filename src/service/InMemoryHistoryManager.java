@@ -3,22 +3,33 @@ package service;
 import model.*;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class InMemoryHistoryManager implements HistoryManager {
-    ArrayList<Task> last10Tasks = new ArrayList<>(10);
+    private List<Task> tasks;
 
     @Override
-    public ArrayList<Task> getAll() {
-        return last10Tasks;
+    public List<Task> getAll() {
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+        }
+        return tasks;
     }
 
     @Override
     public void addTaskToHistory(Task task) {
-        if(last10Tasks.size() >= 9){
-            last10Tasks.remove(0);
-            last10Tasks.add(task);
+        if (tasks == null) {
+            tasks = new ArrayList<>();
+            tasks.add(task);
+        } else if (tasks.size() >= 10) {
+            tasks.remove(0);
+            tasks.add(task);
+        } else if (task == null) {
+            return;
         } else {
-            last10Tasks.add(task);
+            tasks.add(task);
         }
     }
 }

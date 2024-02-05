@@ -9,21 +9,27 @@ import model.Status;
 import model.SubTask;
 import model.Task;
 
-public class InMemoryTaskTaskManager implements TaskManager {
+public class InMemoryTaskManager implements TaskManager {
     private HashMap<Integer, Task> tasks;
     private HashMap<Integer, Epic> epics;
     private HashMap<Integer, SubTask> subTasks;
 
-    private InMemoryHistoryManager historyManager = new InMemoryHistoryManager();;
 
+    private final HistoryManager historyManager;
 
-    public InMemoryTaskTaskManager(InMemoryHistoryManager historyManager) {
+    public InMemoryTaskManager(HistoryManager historyManager) {
+        /*Не поняла как здесь обойтись совсем без конструктора
+        - иначе не получается реализовать зависимость между классами.
+        Кроме того наставник на вебинаре советовал использовать конструктор как самый
+        оптимальный вариант инициализации.*/
         this.historyManager = historyManager;
         this.tasks = new HashMap<>();
         this.epics = new HashMap<>();
         this.subTasks = new HashMap<>();
     }
+
     int count = 0;
+
     int generateId() {
         return count++;
     }
@@ -151,7 +157,7 @@ public class InMemoryTaskTaskManager implements TaskManager {
 
     @Override
     public void deleteAllSubTasks() {
-        for (int id: subTasks.keySet()){
+        for (int id : subTasks.keySet()) {
             deleteSubTask(id);
         }
     }
@@ -194,13 +200,11 @@ public class InMemoryTaskTaskManager implements TaskManager {
         } else {
             epic.setStatus(Status.IN_PROGRESS);
         }
-
     }
 
     @Override
-    public ArrayList<Task> getHistory() {
+    public List<Task> getHistory() {
         return historyManager.getAll();
     }
-
 }
 

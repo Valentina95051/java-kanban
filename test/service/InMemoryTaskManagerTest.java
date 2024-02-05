@@ -2,7 +2,6 @@ package service;
 
 
 import model.Epic;
-import model.Status;
 import model.SubTask;
 import model.Task;
 import org.junit.jupiter.api.Test;
@@ -13,12 +12,12 @@ import java.util.List;
 import static model.Status.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class InMemoryTaskTaskManagerTest {
+class InMemoryTaskManagerTest {
     @Test
     void shouldUpdateTask() {
         Task task = new Task("Test updateTask", NEW, "Test updateTask description");
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskTaskManager taskManager = new InMemoryTaskTaskManager(historyManager);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager(historyManager);
         taskManager.updateTask(task);
 
         final Task savedTask = taskManager.getTask(task.getId());
@@ -38,7 +37,7 @@ class InMemoryTaskTaskManagerTest {
         List<SubTask> testSubTasks = new ArrayList<>();
         Epic epic = new Epic("Test Epic Name", NEW, "", testSubTasks);
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskTaskManager taskManager = new InMemoryTaskTaskManager(historyManager);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager(historyManager);
         Epic testEpic = taskManager.createEpic(epic);
         taskManager.updateEpic(testEpic);
 
@@ -59,7 +58,7 @@ class InMemoryTaskTaskManagerTest {
     void shouldUpdateSubTask() {
 
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskTaskManager taskManager = new InMemoryTaskTaskManager(historyManager);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager(historyManager);
         List<SubTask> testSubTasks = new ArrayList<>();
         //testSubTasks.add(subTask);
         Epic epic = new Epic("Test Epic Name", NEW, "", testSubTasks);

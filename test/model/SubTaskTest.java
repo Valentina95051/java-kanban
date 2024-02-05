@@ -17,9 +17,10 @@ class SubTaskTest {
         testSubTask1.setId(7);
         SubTask testSubTask2 = new SubTask("Тестовое задание2", Status.NEW, "");
         testSubTask2.setId(7);
-        assertEqualsSubTasks(testSubTask1,testSubTask2);
+        assertEqualsSubTasks(testSubTask1, testSubTask2);
     }
-    void assertEqualsSubTasks(SubTask testSubTask1,SubTask testSubTask2){
-        assertEquals(testSubTask1.getId(),testSubTask2.getId(), "Подзадачи должны совпадать, если равен их id");
+
+    void assertEqualsSubTasks(SubTask testSubTask1, SubTask testSubTask2) {
+        assertEquals(testSubTask1.getId(), testSubTask2.getId(), "Подзадачи должны совпадать, если равен их id");
     }
 }

@@ -1,11 +1,9 @@
 package service;
-import model.*;
 
 import model.Epic;
 import model.SubTask;
 import model.Task;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
@@ -51,6 +49,5 @@ public interface TaskManager {
 
     void calculateStatus(Epic epic);
 
-    ArrayList<Task> getHistory();
-
+    List<Task> getHistory();
 }

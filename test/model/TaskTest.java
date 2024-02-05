@@ -15,8 +15,8 @@ class TaskTest {
         testTask2.setId(8);
         assertEqualsTask(testTask1, testTask2);
     }
-    void assertEqualsTask(Task testTask1, Task testTask2){
+
+    void assertEqualsTask(Task testTask1, Task testTask2) {
         assertEquals(testTask1.getId(), testTask2.getId(), "Задачи должны совпадать, если равен их id");
     }
-
 }

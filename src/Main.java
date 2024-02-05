@@ -3,7 +3,7 @@ import model.SubTask;
 import model.Task;
 import model.Status;
 import service.InMemoryHistoryManager;
-import service.InMemoryTaskTaskManager;
+import service.InMemoryTaskManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +29,7 @@ public class Main {
         subTask2.setEpic(epic1);
         subTask3.setEpic(epic2);
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskTaskManager inMemoryTaskManager = new InMemoryTaskTaskManager(historyManager);
+        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(historyManager);
         Task testTask1 = inMemoryTaskManager.createTask(task1);
         Task testTask2 = inMemoryTaskManager.createTask(task2);
         Epic testEpic1 = inMemoryTaskManager.createEpic(epic1);
@@ -67,29 +67,28 @@ public class Main {
 
 
         System.out.println("Задачи:");
-            for (Task task : inMemoryTaskManager.getAllTasks()) {
-                System.out.println(task);
-            }
+        for (Task task : inMemoryTaskManager.getAllTasks()) {
+            System.out.println(task);
+        }
         System.out.println("Эпики:");
-            for (Task epic : inMemoryTaskManager.getAllEpics()) {
-                System.out.println(epic);
+        for (Task epic : inMemoryTaskManager.getAllEpics()) {
+            System.out.println(epic);
 
-                for (Task task : inMemoryTaskManager.getAllSubTasksForEpic(epic.getId())) {
-                    System.out.println("--> " + task);
-                }
+            for (Task task : inMemoryTaskManager.getAllSubTasksForEpic(epic.getId())) {
+                System.out.println("--> " + task);
             }
+        }
         System.out.println("Подзадачи:");
-            for (Task subtask : inMemoryTaskManager.getAllSubTasks()) {
-                System.out.println(subtask);
-            }
+        for (Task subtask : inMemoryTaskManager.getAllSubTasks()) {
+            System.out.println(subtask);
+        }
 
         System.out.println("История:");
-            inMemoryTaskManager.getTask(0);
-            inMemoryTaskManager.getEpic(2);
-            inMemoryTaskManager.getSubTask(4);
-            for (Task task : historyManager.getAll()) {
-                System.out.println(task);
-            }
-
+        inMemoryTaskManager.getTask(0);
+        inMemoryTaskManager.getEpic(2);
+        inMemoryTaskManager.getSubTask(4);
+        for (Task task : historyManager.getAll()) {
+            System.out.println(task);
+        }
     }
 }

@@ -30,7 +30,7 @@ public class SubTask extends Task {
                 ", description='" + getDescription() + '\'' +
                 ", status=" + getStatus() + '\'' +
                 ", epic=" + epic.getName() +
-        '}';
+                '}';
     }
 
     @Override
