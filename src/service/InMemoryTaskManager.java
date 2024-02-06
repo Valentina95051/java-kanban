@@ -10,22 +10,15 @@ import model.SubTask;
 import model.Task;
 
 public class InMemoryTaskManager implements TaskManager {
-    private HashMap<Integer, Task> tasks;
-    private HashMap<Integer, Epic> epics;
-    private HashMap<Integer, SubTask> subTasks;
+    private HashMap<Integer, Task> tasks = new HashMap<>();
+    private HashMap<Integer, Epic> epics = new HashMap<>();
+    private HashMap<Integer, SubTask> subTasks= new HashMap<>();
 
 
-    private final HistoryManager historyManager;
+    private final HistoryManager historyManager = Managers.getDefaultHistory();
 
-    public InMemoryTaskManager(HistoryManager historyManager) {
-        /*Не поняла как здесь обойтись совсем без конструктора
-        - иначе не получается реализовать зависимость между классами.
-        Кроме того наставник на вебинаре советовал использовать конструктор как самый
-        оптимальный вариант инициализации.*/
-        this.historyManager = historyManager;
-        this.tasks = new HashMap<>();
-        this.epics = new HashMap<>();
-        this.subTasks = new HashMap<>();
+    public HistoryManager getHistoryManager(){
+        return this.historyManager;
     }
 
     int count = 0;

@@ -2,11 +2,15 @@ import model.Epic;
 import model.SubTask;
 import model.Task;
 import model.Status;
+import service.HistoryManager;
 import service.InMemoryHistoryManager;
 import service.InMemoryTaskManager;
+import service.Managers;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static service.Managers.getDefaultHistory;
 
 public class Main {
     public static void main(String[] args) {
@@ -28,8 +32,8 @@ public class Main {
         subTask1.setEpic(epic1);
         subTask2.setEpic(epic1);
         subTask3.setEpic(epic2);
-        InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager(historyManager);
+        InMemoryTaskManager inMemoryTaskManager = new InMemoryTaskManager();
+        HistoryManager historyManager = inMemoryTaskManager.getHistoryManager();
         Task testTask1 = inMemoryTaskManager.createTask(task1);
         Task testTask2 = inMemoryTaskManager.createTask(task2);
         Epic testEpic1 = inMemoryTaskManager.createEpic(epic1);
@@ -87,7 +91,7 @@ public class Main {
         inMemoryTaskManager.getTask(0);
         inMemoryTaskManager.getEpic(2);
         inMemoryTaskManager.getSubTask(4);
-        for (Task task : historyManager.getAll()) {
+        for (Task task : inMemoryTaskManager.getHistory()) {
             System.out.println(task);
         }
     }

@@ -17,7 +17,7 @@ class InMemoryTaskManagerTest {
     void shouldUpdateTask() {
         Task task = new Task("Test updateTask", NEW, "Test updateTask description");
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskManager taskManager = new InMemoryTaskManager(historyManager);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
         taskManager.updateTask(task);
 
         final Task savedTask = taskManager.getTask(task.getId());
@@ -37,7 +37,7 @@ class InMemoryTaskManagerTest {
         List<SubTask> testSubTasks = new ArrayList<>();
         Epic epic = new Epic("Test Epic Name", NEW, "", testSubTasks);
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskManager taskManager = new InMemoryTaskManager(historyManager);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
         Epic testEpic = taskManager.createEpic(epic);
         taskManager.updateEpic(testEpic);
 
@@ -58,7 +58,7 @@ class InMemoryTaskManagerTest {
     void shouldUpdateSubTask() {
 
         InMemoryHistoryManager historyManager = new InMemoryHistoryManager();
-        InMemoryTaskManager taskManager = new InMemoryTaskManager(historyManager);
+        InMemoryTaskManager taskManager = new InMemoryTaskManager();
         List<SubTask> testSubTasks = new ArrayList<>();
         //testSubTasks.add(subTask);
         Epic epic = new Epic("Test Epic Name", NEW, "", testSubTasks);

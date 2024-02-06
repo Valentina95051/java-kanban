@@ -25,15 +25,4 @@ class EpicTest {
     void assertEqualsEpic(Epic testEpic1, Epic testEpic2) {
         assertEquals(testEpic1.getId(), testEpic2.getId(), "Эпики должны совпадать, если равен их id");
     }
-
-
-    /*@Test
-    void shouldNotAddEpicIntoItSelf(){
-        Проверьте, что объект Epic нельзя добавить в самого себя в виде подзадачи - тест есть в ТЗ, но само устройство
-        кода не допускает такого действия и попытка запуска теста приводит к ошибке компиляции. В итоге наставник
-        написал что в ТЗ ошибка и этот тест делать не нужно.
-        List<SubTask> testSubtasks = new ArrayList<>();
-        Epic testEpic = new Epic("Тестовое задание1", Status.NEW, "", testSubtasks);
-        assertThrows(IllegalArgumentException.class, () -> testSubtasks.add(testEpic));
-    }*/
 }

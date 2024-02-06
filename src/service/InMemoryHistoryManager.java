@@ -20,14 +20,14 @@ public class InMemoryHistoryManager implements HistoryManager {
 
     @Override
     public void addTaskToHistory(Task task) {
-        if (tasks == null) {
+        if (task == null) {
+            return;
+        } else if (tasks == null){
             tasks = new ArrayList<>();
             tasks.add(task);
         } else if (tasks.size() >= 10) {
             tasks.remove(0);
             tasks.add(task);
-        } else if (task == null) {
-            return;
         } else {
             tasks.add(task);
         }

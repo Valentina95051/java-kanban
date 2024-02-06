@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 //интерфейс для управления историей просмотров
-public interface HistoryManager<T extends Task> {
+public interface HistoryManager {
 
-    void addTaskToHistory(T task);
+    void addTaskToHistory(Task task);
 
     List<Task> getAll();
 }
